@@ -9,17 +9,39 @@ import DashboardRoute from '../../routes/DashboardRoute/DashboardRoute'
 import LearningRoute from '../../routes/LearningRoute/LearningRoute'
 import NotFoundRoute from '../../routes/NotFoundRoute/NotFoundRoute'
 import './App.css'
+import AuthApiService from '../../services/auth-api-service';
+import WordContext from '../../contexts/WordContext';
 
 export default class App extends Component {
-  state = { hasError: false }
+  state = { 
+    hasError: false,
+    language: {},
+    words: [],
+  }
 
   static getDerivedStateFromError(error) {
     console.error(error)
     return { hasError: true }
   }
 
+  componentDidMount() {
+    AuthApiService.getLanguageWords()
+      .then((resJson) => {
+        this.setState({
+          language: resJson.language,
+          words: resJson.words,
+        })
+      })
+      .catch((err) => {
+        this.setState({ err });
+      })
+  }
+
   render() {
-    const { hasError } = this.state
+    const { hasError, language, words } = this.state
+    const value = {
+      language, words
+    }
     return (
       <div className='App'>
         <Header />
@@ -27,28 +49,30 @@ export default class App extends Component {
           {hasError && (
             <p>There was an error! Oh no!</p>
           )}
-          <Switch>
-            <PrivateRoute
-              exact
-              path={'/'}
-              component={DashboardRoute}
-            />
-            <PrivateRoute
-              path={'/learn'}
-              component={LearningRoute}
-            />
-            <PublicOnlyRoute
-              path={'/register'}
-              component={RegistrationRoute}
-            />
-            <PublicOnlyRoute
-              path={'/login'}
-              component={LoginRoute}
-            />
-            <Route
-              component={NotFoundRoute}
-            />
+          <WordContext.Provider value={value}>
+            <Switch>
+              <PrivateRoute
+                exact
+                path={'/'}
+                component={DashboardRoute}
+              />
+              <PrivateRoute
+                path={'/learn'}
+                component={LearningRoute}
+              />
+              <PublicOnlyRoute
+                path={'/register'}
+                component={RegistrationRoute}
+              />
+              <PublicOnlyRoute
+                path={'/login'}
+                component={LoginRoute}
+              />
+              <Route
+                component={NotFoundRoute}
+              />
           </Switch>
+          </WordContext.Provider>
         </main>
       </div>
     );
