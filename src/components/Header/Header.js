@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import TokenService from '../../services/token-service'
 import UserContext from '../../contexts/UserContext'
 import './Header.css'
+import earth from '../../images/cartoon-earth.png';
 
 class Header extends Component {
   static contextType = UserContext
@@ -42,8 +43,9 @@ class Header extends Component {
     return (
       <header>
         <h1>
+          <img className="logo" src={earth} alt="earth" />
           <Link to='/'>
-            Spaced repetition
+            LangGo
           </Link>
         </h1>
         {TokenService.hasAuthToken()
