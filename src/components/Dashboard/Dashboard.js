@@ -1,5 +1,6 @@
 import React from 'react';
 import WordContext from '../../contexts/WordContext';
+import Table from '../Table/Table';
 
 class Dashboard extends React.Component {
 
@@ -14,7 +15,8 @@ class Dashboard extends React.Component {
       <h3>My language: {language.name}</h3>
       <div className='word-container'>
         <p>Words to practice: </p>
-        
+        {/* Gonna try and add a table instead of just doing a ul */}
+        <Table />
       </div>
     </div>
   )
