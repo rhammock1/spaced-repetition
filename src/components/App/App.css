@@ -4,3 +4,34 @@
   width: 100%;
   height:100%;
 }
+
+button {
+  background-color: #598392;
+  border: none;
+  color: #efefef;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 8px 11px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 2px #121212;
+}
+button:hover {
+  transform: translateY(-5px);
+}
+section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+}
+section>h2 {
+  width:85%;
+  margin:auto;
+  padding-bottom: 10px;
+}
+section>p {
+  width: 75%;
+  margin: auto;
+  padding: 10px 0px;
+}

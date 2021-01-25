@@ -13,10 +13,20 @@ class Header extends Component {
   }
 
   renderLogoutLink() {
+    const date = new Date();
+    const hour = date.getHours();
+    let greeting;
+    if (hour < 12) {
+      greeting = 'Good Morning, '
+    } else if (12 < hour < 18) {
+      greeting = 'Good Afternoon, '
+    } else {
+      greeting = 'Good Evening, '
+    }
     return (
       <div>
         <span>
-          {this.context.user.name}
+          {greeting}{this.context.user.name}
         </span>
         <nav>
           <Link
