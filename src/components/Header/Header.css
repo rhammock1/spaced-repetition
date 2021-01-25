@@ -19,9 +19,9 @@ header>div>span {
 }
 .logo {
   width:25%;
-  z-index: 0;
-  position: absolute;
-  align-self:flex-start;
+  /* z-index: 0;
+  position: absolute; */
+  /* align-self:flex-start; */
   padding-left: 5px;
 }
 h1>a, nav>a {
@@ -37,11 +37,12 @@ h1 {
   font-size: 35px;
   position:relative;
   width: 66%;
+  height:100%;
   text-align: center;
   display:flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: baseline;
 }
 header>nav {
   font-size: 20px;

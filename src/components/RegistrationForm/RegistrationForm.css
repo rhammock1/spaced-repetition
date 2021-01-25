@@ -1,6 +1,8 @@
 form {
   display:flex;
   flex-direction:column;
+  width: fit-content;
+  margin:auto;
 }
 .LoginForm {
   width: fit-content;
@@ -10,10 +12,11 @@ form>div {
   width: min-content;
   margin:auto;
 }
-section>form {
-  width: 75%;
+/* section>form {
+  /* width: 75%;
   margin:auto;
-}
+} 
+*/
 form>footer {
   margin-top: 10px;
   width:100%;
