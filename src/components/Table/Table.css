@@ -1,11 +1,20 @@
 #students {
   text-align: center;
   border-collapse: collapse;
-  border: 3px solid #ddd;
   width: 100%;
+}
+th {
+  background-color: #503F46;
+  color: #efefef;
 }
 
 #students td, #students th {
-  border: 1px solid #ddd;
-  padding: 8px;
+  border-left: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 1px;
+  padding-bottom: 5px;
 }
+td {
+  font-size: 16px;
+}
+#students tr:nth-child(even){background-color: #f2f2f2;}

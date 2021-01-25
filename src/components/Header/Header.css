@@ -13,6 +13,7 @@ header>div {
 }
 header>div>nav {
   margin:auto;
+  font-size: 18px;
 }
 header>div>span {
   padding-top: 10px;
@@ -25,7 +26,7 @@ header>div>span {
   padding-left: 5px;
 }
 h1>a, nav>a {
-  color: #67515A;
+  color: #503F46;
   font-weight: 800;
   text-decoration: none;
   z-index: 2;
