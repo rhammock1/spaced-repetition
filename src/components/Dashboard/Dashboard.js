@@ -8,7 +8,7 @@ class Dashboard extends React.Component {
   static contextType = WordContext;
 
   render() {
-    const { language, words } = this.context;
+    const { language } = this.context;
 
     return (
     <div className='dashboard'>
