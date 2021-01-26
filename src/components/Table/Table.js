@@ -29,7 +29,7 @@ class Table extends React.Component {
   }
 
   renderTableHeader() {
-    const wordKeys = ['original', 'translation', 'correct count', 'incorrect count'];
+    const wordKeys = ['original', 'english', 'correct count', 'incorrect count'];
     let header = wordKeys;
     return header.map((key, index) => {
       return <th key={index}>{key.toUpperCase()}</th>
