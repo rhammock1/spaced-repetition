@@ -17,3 +17,14 @@
   margin: auto;
   margin-bottom: 10px;
 }
+.practice {
+  width: 50%;
+  margin: auto;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.practice>ul {
+  margin: 0;
+}
