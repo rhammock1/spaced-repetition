@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import WordContext from '../../contexts/WordContext';
 import Table from '../Table/Table';
 import './Dashboard.css';
@@ -17,7 +18,7 @@ class Dashboard extends React.Component {
       {/* Add language as header and a start practicing button. Later make an api request to get the words from the list and list them out in their component. */}
       <div className='practice-container'>
         <h3>Total correct answers: {total}</h3>
-        <button type="button">Start Practicing</button>
+        <button type="button"><Link to='/learn'>Start Practicing</Link></button>
       </div>
       <div className='word-container'>
         
