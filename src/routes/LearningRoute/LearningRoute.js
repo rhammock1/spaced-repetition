@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import Answer from '../../components/Answer/Answer';
 import LearningCard from '../../components/LearningCard/LearningCard';
 import WordContext from '../../contexts/WordContext'
 import AuthApiService from '../../services/auth-api-service';
@@ -16,6 +17,7 @@ class LearningRoute extends Component {
     wordCorrectCount: 0,
     wordIncorrectCount: 0,
     totalScore: 0,
+    answer: '',
   }
 
   componentDidMount() {
@@ -63,6 +65,10 @@ class LearningRoute extends Component {
     this.setState({ seen: true });
   }
 
+  handleCloseAnswer = () => {
+    this.setState({ isCorrect: null });
+  }
+
   render() {
     const {
       seen,
@@ -70,7 +76,8 @@ class LearningRoute extends Component {
       isCorrect,
       totalScore,
       wordCorrectCount,
-      wordIncorrectCount, } = this.state;
+      wordIncorrectCount,
+      answer, } = this.state;
 
     return (
       <section>
@@ -85,20 +92,18 @@ class LearningRoute extends Component {
         
         <LearningCard handleGuess={this.handlePostGuess} word={nextWord} />
         <div className='score-container'>
-          <p>Number of times wrong: {wordIncorrectCount} <br />
-          Number of times correct: {wordCorrectCount}</p>
           <p>Your total score is: {totalScore} </p>
         </div>
         <button type='button'><Link to='/'>Go back to Dashboard</Link></button>
         {/* AnswerResponse component */}
-        {/* {(isCorrect)
-          ? 
+        {(isCorrect)
+          ? <Answer answer={answer} handleCloseAnswer={this.handleCloseAnswer} total={totalScore} incorrect={wordIncorrectCount} correct={wordCorrectCount} isCorrect={true} />
           : null
-        } */}
-        {/* {(isCorrect === false)
-          ? 
+        }
+        {(isCorrect === false)
+          ? <Answer answer={answer} handleCloseAnswer={this.handleCloseAnswer} total={totalScore} incorrect={wordIncorrectCount} correct={wordCorrectCount} isCorrect={false} />
           : null
-        } */}
+        }
       </section>
     );
   }
