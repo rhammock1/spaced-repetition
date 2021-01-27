@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
+import LearningCard from '../../components/LearningCard/LearningCard';
 import WordContext from '../../contexts/WordContext'
 import AuthApiService from '../../services/auth-api-service';
 
@@ -10,7 +12,10 @@ class LearningRoute extends Component {
     seen: false,
     isCorrect: null,
     error: null,
-    head: {},
+    nextWord: '',
+    wordCorrectCount: 0,
+    wordIncorrectCount: 0,
+    totalScore: 0,
   }
 
   componentDidMount() {
@@ -20,8 +25,38 @@ class LearningRoute extends Component {
   handleGetHead = () => {
     AuthApiService.getHead()
       .then((resJson) => {
-        this.setState({ head: resJson })
+        console.log(resJson);
+        this.setState({ 
+          nextWord: resJson.nextWord,
+          totalScore: resJson.totalScore,
+          wordCorrectCount: resJson.wordCorrectCount,
+          wordIncorrectCount: resJson.wordIncorrectCount,
+         })
       })
+      .catch((err) => this.setState({ err }))
+  }
+
+  handlePostGuess = (event) => {
+    event.preventDefault();
+    let guess = event.target.guess.value;
+    guess = {
+      guess: guess
+    };
+    event.target.guess.value = '';
+    AuthApiService.postGuess(guess)
+      .then((resJson) => {
+        
+        this.setState({
+          isCorrect: resJson.isCorrect,
+          answer: resJson.answer,
+
+        })
+        
+      })
+      .then(() => {
+        this.handleGetHead();
+      })
+      .catch((err) => this.setState({ err }))
   }
 
   handleSeen = () => {
@@ -29,7 +64,14 @@ class LearningRoute extends Component {
   }
 
   render() {
-    const { seen } = this.state;
+    const {
+      seen,
+      nextWord,
+      isCorrect,
+      totalScore,
+      wordCorrectCount,
+      wordIncorrectCount, } = this.state;
+
     return (
       <section>
         <h2>Learning</h2>
@@ -40,8 +82,23 @@ class LearningRoute extends Component {
             </div>
           : null 
         }
-        {/* Learning card component */}
+        
+        <LearningCard handleGuess={this.handlePostGuess} word={nextWord} />
+        <div className='score-container'>
+          <p>Number of times wrong: {wordIncorrectCount} <br />
+          Number of times correct: {wordCorrectCount}</p>
+          <p>Your total score is: {totalScore} </p>
+        </div>
+        <button type='button'><Link to='/'>Go back to Dashboard</Link></button>
         {/* AnswerResponse component */}
+        {/* {(isCorrect)
+          ? 
+          : null
+        } */}
+        {/* {(isCorrect === false)
+          ? 
+          : null
+        } */}
       </section>
     );
   }

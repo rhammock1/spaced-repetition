@@ -12,6 +12,8 @@ class Dashboard extends React.Component {
     const { words } = this.context;
     let total = 0;
     words.map((word) => total += word.correct_count);
+    const result = [...words];
+    result.sort((a, b) => (a.incorrect_count < b.incorrect_count) ? 1 : -1);
 
     return (
     <div className='dashboard'>
@@ -26,9 +28,9 @@ class Dashboard extends React.Component {
           ? <div className='practice'>
               <h4>Words to practice: </h4>
               <ul>
-                <li>{words[0].original}</li>
-                <li>{words[1].original}</li>
-                <li>{words[2].original}</li>
+                <li>{result[0].original}</li>
+                <li>{result[1].original}</li>
+                <li>{result[2].original}</li>
               </ul>
             </div>
           : null
