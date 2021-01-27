@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import WordContext from '../../contexts/WordContext'
+import AuthApiService from '../../services/auth-api-service';
 
 class LearningRoute extends Component {
   
@@ -9,6 +10,18 @@ class LearningRoute extends Component {
     seen: false,
     isCorrect: null,
     error: null,
+    head: {},
+  }
+
+  componentDidMount() {
+    this.handleGetHead();
+  }
+
+  handleGetHead = () => {
+    AuthApiService.getHead()
+      .then((resJson) => {
+        this.setState({ head: resJson })
+      })
   }
 
   handleSeen = () => {
