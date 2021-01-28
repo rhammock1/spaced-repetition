@@ -1,5 +1,18 @@
 # Spaced Repetition Capstone
 
+Hosted on [Vercel](https://spaced-repetition-two-theta.vercel.app/)
+Server Repo on [GitHub](https://github.com/rhammock1/spaced-repetition-api)
+
+## Thinkful Capstone project practicing Linked Lists
+
+This app helps the user learn a new language through the learning technique of spaced repetition. When the user gets translates the word correctly, the word moves further back in line so they're tested less often on it. When they get the answer wrong, the word only moves back a few spaces so the user is tested more frequently on the word.
+
+### Screen Shots
+
+![ScreenShot](./src/images/login-view.png)
+![ScreenShot](./src/images/dashboard-view.png)
+![ScreenShot](./src/images/learning-view.png)
+
 ## Setup
 
 To setup the application
