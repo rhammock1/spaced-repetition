@@ -10,7 +10,6 @@ class LearningRoute extends Component {
   static contextType = WordContext;
 
   state = {
-    seen: false,
     isCorrect: null,
     error: null,
     nextWord: '',
@@ -18,6 +17,7 @@ class LearningRoute extends Component {
     wordIncorrectCount: 0,
     totalScore: 0,
     answer: '',
+    guess: '',
   }
 
   componentDidMount() {
@@ -41,6 +41,7 @@ class LearningRoute extends Component {
   handlePostGuess = (event) => {
     event.preventDefault();
     let guess = event.target.guess.value;
+    this.setState({ guess });
     guess = {
       guess: guess
     };
@@ -61,48 +62,40 @@ class LearningRoute extends Component {
       .catch((err) => this.setState({ err }))
   }
 
-  handleSeen = () => {
-    this.setState({ seen: true });
-  }
-
   handleCloseAnswer = () => {
     this.setState({ isCorrect: null });
   }
 
   render() {
     const {
-      seen,
       nextWord,
       isCorrect,
       totalScore,
       wordCorrectCount,
       wordIncorrectCount,
-      answer, } = this.state;
+      answer,
+      guess, } = this.state;
 
     return (
       <section>
-        <h2>Learning</h2>
-        {(!seen)
-          ? <div className='popup'>
-              <p>Are you ready?</p>
-              <button onClick={this.handleSeen} type='button'>Start</button>
-            </div>
-          : null 
-        }
-        
-        <LearningCard handleGuess={this.handlePostGuess} word={nextWord} />
-        <div className='score-container'>
-          <p>Your total score is: {totalScore} </p>
-        </div>
-        <button type='button'><Link to='/'>Go back to Dashboard</Link></button>
-        {/* AnswerResponse component */}
-        {(isCorrect)
-          ? <Answer answer={answer} handleCloseAnswer={this.handleCloseAnswer} total={totalScore} incorrect={wordIncorrectCount} correct={wordCorrectCount} isCorrect={true} />
-          : null
-        }
-        {(isCorrect === false)
-          ? <Answer answer={answer} handleCloseAnswer={this.handleCloseAnswer} total={totalScore} incorrect={wordIncorrectCount} correct={wordCorrectCount} isCorrect={false} />
-          : null
+        {(isCorrect === null)
+          ? <>
+              <div className='page-heading'>
+                <h2>Translate the word:</h2><span className='underline'>{nextWord}</span>
+                <p>Your total score is: {totalScore}</p>
+              </div>
+              <LearningCard handleGuess={this.handlePostGuess} word={nextWord} />
+              <div className='score-container'>
+                <p>You have answered this word incorrectly {wordIncorrectCount} times.<br />
+                  You have answered this word correctly {wordCorrectCount} times.</p>
+              </div>
+              <button type='button'><Link to='/'>Go back to Dashboard</Link></button>
+            </>
+          : (isCorrect)
+              ? <Answer word={nextWord} guess={guess} answer={answer} handleCloseAnswer={this.handleCloseAnswer} total={totalScore} incorrect={wordIncorrectCount} correct={wordCorrectCount} isCorrect={true} />
+              : (isCorrect === false)
+                  ? <Answer word={nextWord} guess={guess} answer={answer} handleCloseAnswer={this.handleCloseAnswer} total={totalScore} incorrect={wordIncorrectCount} correct={wordCorrectCount} isCorrect={false} />
+                  : null
         }
       </section>
     );

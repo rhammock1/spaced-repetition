@@ -55,7 +55,8 @@ class Header extends Component {
         <h1>
           <img className="logo" src={earth} alt="earth" />
           <Link to='/'>
-            LangGo
+            Spaced repetition 
+            {/* LangGo */}
           </Link>
         </h1>
         {TokenService.hasAuthToken()

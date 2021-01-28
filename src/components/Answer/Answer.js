@@ -1,35 +1,38 @@
 import React from 'react';
 
 const Answer = function(props) {
-  const { isCorrect,
-  incorrect,
-  correct,
-  total,
-  handleCloseAnswer,
-  answer } = props;
+  const { 
+    guess,
+    word,
+    isCorrect,
+    total,
+    handleCloseAnswer,
+    answer } = props;
   return (
     (isCorrect)
       ? (
         <div className='answer-container'>
-          <h4>Correct! That's the right answer!</h4>
-          <div className='score-container'>
-            <p>Number of times wrong: {incorrect} <br />
-            Number of times correct: {correct}</p>
-            <p>Your total score is: {total} </p>
+          <div className='DisplayFeedback'>
+            <h4>You were correct! :D</h4>
+          </div>
+          <div className='DisplayScore'>
+            <p>Your total score is: {total}</p>
           </div>
           <button onClick={handleCloseAnswer} type='button'>Try another</button>
         </div>
+        
       )
       : (
         <div className='answer-container'>
-          <h4>Not quite!</h4>
-          <p>The right answer is {answer}</p>
-          <div className='score-container'>
-            <p>Number of times wrong: {incorrect} <br />
-            Number of times correct: {correct}</p>
-            <p>Your total score is: {total} </p>
+          <div className='DisplayFeedback'>
+            <h2>Good try, but not quite right :(</h2>
+            <p>The correct translation for {word} was {answer} and you chose {guess}!</p>
           </div>
-          <button onClick={handleCloseAnswer} type='button'>Try another</button>
+          <div className='DisplayScore'>            
+            <p>Your total score is: {total}</p>
+          </div>
+          <button onClick={handleCloseAnswer} type='button'>Try another word!</button>
+        
         </div>
       )
     
