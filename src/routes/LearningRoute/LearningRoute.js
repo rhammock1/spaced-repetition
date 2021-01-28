@@ -81,7 +81,11 @@ class LearningRoute extends Component {
         {(isCorrect === null)
           ? <>
               <div className='page-heading'>
-                <h2>Translate the word:</h2><span className='underline'>{nextWord}</span>
+                <h2>Translate the word:</h2>
+                <p>{' '}
+                  <span className='underline'>
+                  {nextWord}</span>
+                </p>
                 <p>Your total score is: {totalScore}</p>
               </div>
               <LearningCard handleGuess={this.handlePostGuess} word={nextWord} />

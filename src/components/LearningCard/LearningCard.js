@@ -1,4 +1,5 @@
 import React from 'react';
+import './LearningCard.css';
 
 const LearningCard = function(props) {
   const { handleGuess } = props
