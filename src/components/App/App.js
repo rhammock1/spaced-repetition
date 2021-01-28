@@ -24,7 +24,7 @@ export default class App extends Component {
     return { hasError: true }
   }
 
-  handleGetWords() {
+  handleGetWords = () => {
     AuthApiService.getLanguageWords()
       .then((resJson) => {
         this.setState({
