@@ -8,6 +8,11 @@ class Dashboard extends React.Component {
 
   static contextType = WordContext;
 
+  componentDidMount() {
+    const { handleGetWords } = this.context;
+    handleGetWords();
+  }
+
   render() {
     const { words } = this.context;
     let total = 0;

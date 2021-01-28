@@ -24,7 +24,7 @@ export default class App extends Component {
     return { hasError: true }
   }
 
-  componentDidMount() {
+  handleGetWords() {
     AuthApiService.getLanguageWords()
       .then((resJson) => {
         this.setState({
@@ -40,7 +40,7 @@ export default class App extends Component {
   render() {
     const { hasError, language, words } = this.state
     const value = {
-      language, words
+      language, words, handleGetWords: this.handleGetWords,
     }
     return (
       <div className='App'>
