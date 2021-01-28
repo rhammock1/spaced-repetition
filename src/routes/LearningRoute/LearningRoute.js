@@ -93,7 +93,7 @@ class LearningRoute extends Component {
                 <p>You have answered this word incorrectly {wordIncorrectCount} times.<br />
                   You have answered this word correctly {wordCorrectCount} times.</p>
               </div>
-              <button type='button'><Link to='/'>Go back to Dashboard</Link></button>
+              <button id='dashboard-button' type='button'><Link to='/'>Go back to Dashboard</Link></button>
             </>
           : (isCorrect)
               ? <Answer word={nextWord} guess={guess} answer={answer} handleCloseAnswer={this.handleCloseAnswer} total={totalScore} incorrect={wordIncorrectCount} correct={wordCorrectCount} isCorrect={true} />

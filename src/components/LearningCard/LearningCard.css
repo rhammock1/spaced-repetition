@@ -18,3 +18,7 @@
 .score-container {
   text-align:center;
 }
+#dashboard-button {
+  width: fit-content;
+  align-self: center;
+}
