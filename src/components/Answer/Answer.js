@@ -1,4 +1,5 @@
 import React from 'react';
+import './Answer.css';
 
 const Answer = function(props) {
   const { 
