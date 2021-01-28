@@ -15,16 +15,11 @@ class Dashboard extends React.Component {
 
   render() {
     const { words } = this.context;
-    let total = 0;
-    words.map((word) => total += word.correct_count);
-    const result = [...words];
-    result.sort((a, b) => (a.incorrect_count < b.incorrect_count) ? 1 : -1);
-
+    const { result } = this.props;
     return (
     <div className='dashboard'>
       {/* Add language as header and a start practicing button. Later make an api request to get the words from the list and list them out in their component. */}
       <div className='practice-container'>
-        <h3>Total correct answers: {total}</h3>
         <button type="button"><Link to='/learn'>Start Practicing</Link></button>
       </div>
       <div className='word-container'>
