@@ -1,6 +1,6 @@
 .underline {
-  text-decoration: underline;
   font-size:20px;
+  font-weight: 600;
 }
 .page-heading {
   width:100%;

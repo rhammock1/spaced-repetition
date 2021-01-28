@@ -12,6 +12,7 @@ class LearningRoute extends Component {
   state = {
     isCorrect: null,
     error: null,
+    currentWord: '',
     nextWord: '',
     wordCorrectCount: 0,
     wordIncorrectCount: 0,
@@ -29,6 +30,7 @@ class LearningRoute extends Component {
       .then((resJson) => {
         console.log(resJson);
         this.setState({ 
+          currentWord: resJson.nextWord,
           nextWord: resJson.nextWord,
           totalScore: resJson.totalScore,
           wordCorrectCount: resJson.wordCorrectCount,
@@ -48,10 +50,11 @@ class LearningRoute extends Component {
     event.target.guess.value = '';
     AuthApiService.postGuess(guess)
       .then((resJson) => {
-        
+        const { nextWord } = this.state;
         this.setState({
           isCorrect: resJson.isCorrect,
           answer: resJson.answer,
+          currentWord: nextWord,
           nextWord: resJson.nextWord,
           wordCorrectCount: resJson.wordCorrectCount,
           wordIncorrectCount: resJson.wordIncorrectCount,
@@ -68,6 +71,7 @@ class LearningRoute extends Component {
 
   render() {
     const {
+      currentWord,
       nextWord,
       isCorrect,
       totalScore,
@@ -75,7 +79,7 @@ class LearningRoute extends Component {
       wordIncorrectCount,
       answer,
       guess, } = this.state;
-
+    
     return (
       <section>
         {(isCorrect === null)
@@ -96,9 +100,9 @@ class LearningRoute extends Component {
               <button id='dashboard-button' type='button'><Link to='/'>Go back to Dashboard</Link></button>
             </>
           : (isCorrect)
-              ? <Answer word={nextWord} guess={guess} answer={answer} handleCloseAnswer={this.handleCloseAnswer} total={totalScore} incorrect={wordIncorrectCount} correct={wordCorrectCount} isCorrect={true} />
+              ? <Answer word={currentWord} guess={guess} answer={answer} handleCloseAnswer={this.handleCloseAnswer} total={totalScore} incorrect={wordIncorrectCount} correct={wordCorrectCount} isCorrect={true} />
               : (isCorrect === false)
-                  ? <Answer word={nextWord} guess={guess} answer={answer} handleCloseAnswer={this.handleCloseAnswer} total={totalScore} incorrect={wordIncorrectCount} correct={wordCorrectCount} isCorrect={false} />
+                  ? <Answer word={currentWord} guess={guess} answer={answer} handleCloseAnswer={this.handleCloseAnswer} total={totalScore} incorrect={wordIncorrectCount} correct={wordCorrectCount} isCorrect={false} />
                   : null
         }
       </section>
