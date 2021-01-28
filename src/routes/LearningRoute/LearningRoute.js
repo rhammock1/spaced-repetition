@@ -52,12 +52,12 @@ class LearningRoute extends Component {
         this.setState({
           isCorrect: resJson.isCorrect,
           answer: resJson.answer,
-
+          nextWord: resJson.nextWord,
+          wordCorrectCount: resJson.wordCorrectCount,
+          wordIncorrectCount: resJson.wordIncorrectCount,
+          totalScore: resJson.totalScore,
         })
         
-      })
-      .then(() => {
-        this.handleGetHead();
       })
       .catch((err) => this.setState({ err }))
   }
